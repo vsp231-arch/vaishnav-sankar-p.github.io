@@ -4,84 +4,481 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Vaishnav Sankar P</title>
-  <meta name="description" content="Computer Science Engineering Student | AI & Full-Stack Developer" />
+  <meta name="description" content="Vaishnav Sankar P: computer science student building AI, computer vision and full-stack software." />
+  <meta name="theme-color" content="#0A0A0B" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;1,800;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; line-height:1.6; padding:32px; max-width:900px; margin:0 auto; color:#111 }
-    h1,h2 { color:#0b3d91 }
-    a { color:#0969da }
-    pre { background:#f6f8fa; padding:12px; border-radius:6px }
-    .stack { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px }
+    :root {
+      --black: #0A0A0B;
+      --panel: #131316;
+      --panel-2: #1B1B20;
+      --red: #E10600;
+      --red-hot: #FF2A1F;
+      --white: #F5F5F5;
+      --muted: #A3A3AD;
+      --line: rgba(255,255,255,.12);
+      --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+      --body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--black); color: var(--white);
+      font: 400 1.0625rem/1.65 var(--body); -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--red-hot); outline-offset: 3px; border-radius: 4px; }
+    .wrap { width: min(1120px, 100% - 40px); margin-inline: auto; position: relative; }
+
+    /* nav */
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; position: relative; z-index: 2; }
+    .nav .mark { font: italic 900 1.5rem var(--display); text-decoration: none; letter-spacing: .01em; text-transform: uppercase; }
+    .nav .mark span { color: var(--red-hot); }
+    .nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; font-weight: 600; }
+    .nav ul a { text-decoration: none; color: var(--muted); padding: 4px 0; border-bottom: 3px solid transparent; transition: color .15s, border-color .15s; }
+    .nav ul a:hover { color: var(--white); border-color: var(--red); }
+
+    /* hero with moving speed stripes */
+    .hero-bg { position: relative; overflow: hidden; }
+    .hero-bg::before {
+      content: ""; position: absolute; inset: -20% -10%;
+      background:
+        repeating-linear-gradient(115deg, transparent 0 64px, rgba(225,6,0,.16) 64px 72px, transparent 72px 150px);
+      animation: drift 9s linear infinite;
+      mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+    }
+    @keyframes drift { to { transform: translateX(150px); } }
+    .hero { padding: clamp(24px, 5vw, 56px) 0 clamp(36px, 6vw, 64px); position: relative; }
+    .intro { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(220px, .8fr); gap: clamp(24px, 5vw, 64px); align-items: center; margin-bottom: clamp(32px, 5vw, 56px); }
+    h1 {
+      font: italic 900 clamp(3.2rem, 10vw, 8rem)/.88 var(--display);
+      text-transform: uppercase; letter-spacing: -.005em; margin: 0 0 24px; text-wrap: balance;
+    }
+    .lede { max-width: 52ch; font-size: clamp(1.1rem, 1.6vw, 1.28rem); color: var(--muted); margin: 0 0 30px; }
+    .lede strong { color: var(--white); font-weight: 600; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; min-height: 50px; padding: 0 26px;
+      font: 800 1.2rem var(--display); text-transform: uppercase; letter-spacing: .04em; text-decoration: none;
+      clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+      transition: background .15s, color .15s, transform .15s;
+    }
+    .btn.primary { background: var(--red); color: #fff; }
+    .btn.primary:hover { background: var(--red-hot); transform: translateX(3px); }
+    .btn.ghost { background: var(--white); color: var(--black); }
+    .btn.ghost:hover { background: #fff; transform: translateX(3px); }
+
+    /* photo */
+    .photo { position: relative; max-width: 360px; justify-self: end; width: 100%; }
+    .photo::before {
+      content: ""; position: absolute; inset: 14px -14px -14px 14px; background: var(--red);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%);
+    }
+    .photo img {
+      position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%, 0 88%);
+      filter: contrast(1.04);
+    }
+
+    /* feed */
+    .feed { position: relative; background: #0D0D10; aspect-ratio: 16 / 8; min-height: 260px; border: 1px solid var(--line); border-top: 4px solid var(--red); overflow: hidden; }
+    .feed canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .feed-note { margin: 12px 2px 0; font-size: .92rem; color: var(--muted); }
+
+    /* ticker */
+    .ticker { background: var(--red); color: #fff; overflow: hidden; transform: skewY(-1.2deg); margin: 20px 0 8px; }
+    .ticker-track { display: flex; width: max-content; animation: scroll 32s linear infinite; }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+    .ticker span { font: italic 900 1.7rem/1 var(--display); text-transform: uppercase; padding: 14px 26px; white-space: nowrap; }
+    .ticker span::after { content: "/"; margin-left: 52px; color: rgba(0,0,0,.45); }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+
+    /* sections */
+    section { padding: clamp(48px, 8vw, 96px) 0; }
+    .split { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(0, 3.4fr); gap: clamp(20px, 5vw, 64px); }
+    h2 { font: italic 900 clamp(2.4rem, 5vw, 3.6rem)/.95 var(--display); text-transform: uppercase; margin: 0; padding-left: 16px; border-left: 6px solid var(--red); }
+    p { margin: 0 0 1em; max-width: 62ch; }
+
+    /* projects */
+    .projects { display: grid; gap: 22px; }
+    .project {
+      background: var(--panel); padding: clamp(22px, 4vw, 38px); position: relative;
+      border: 1px solid var(--line); transition: border-color .2s, transform .2s;
+    }
+    .project::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--red); transition: width .2s; }
+    .project:hover { border-color: rgba(255,42,31,.6); transform: translateX(4px); }
+    .project:hover::before { width: 12px; }
+    .project h3 { font: italic 800 clamp(1.8rem, 3.2vw, 2.5rem)/1 var(--display); text-transform: uppercase; margin: 0 0 14px; }
+    .project p { color: #CFCFD6; }
+    .caps { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 22px 0 24px; padding: 0; list-style: none; }
+    .caps li { background: var(--panel-2); padding: 10px 14px; border-top: 3px solid var(--red); font-weight: 600; font-size: .98rem; }
+    .caps li small { display: block; font-weight: 400; color: var(--muted); font-size: .86rem; line-height: 1.4; margin-top: 2px; }
+    .link { font: 800 1.15rem var(--display); text-transform: uppercase; letter-spacing: .04em; text-decoration: none; border-bottom: 3px solid var(--red); padding-bottom: 2px; }
+    .link:hover { color: var(--red-hot); }
+    .more { margin-top: 22px; color: var(--muted); }
+
+    /* stack */
+    .stack { margin: 0; }
+    .stack > div { display: grid; grid-template-columns: minmax(120px, 1fr) minmax(0, 3fr); gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+    .stack > div:first-child { padding-top: 0; }
+    .stack dt { font: italic 800 1.5rem var(--display); text-transform: uppercase; color: var(--red-hot); }
+    .stack dd { margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .stack dd span { background: var(--panel-2); padding: 3px 14px; font-weight: 500; border-bottom: 2px solid transparent; transition: border-color .15s, background .15s; }
+    .stack dd span:hover { border-color: var(--red-hot); background: #24242b; }
+
+    /* focus */
+    .focus { list-style: none; margin: 0; padding: 0; }
+    .focus li { padding: 18px 0; border-bottom: 1px solid var(--line); font: italic 800 clamp(1.5rem, 3vw, 2.1rem)/1.1 var(--display); text-transform: uppercase; }
+    .focus li:first-child { padding-top: 0; }
+    .focus li small { display: block; font: 400 1.02rem/1.5 var(--body); text-transform: none; font-style: normal; color: var(--muted); margin-top: 4px; }
+
+    /* contact */
+    .contact { background: var(--red); color: #fff; position: relative; overflow: hidden; }
+    .contact::after {
+      content: ""; position: absolute; inset: 0;
+      background: repeating-linear-gradient(115deg, transparent 0 80px, rgba(0,0,0,.14) 80px 90px, transparent 90px 180px);
+      animation: drift 12s linear infinite; pointer-events: none;
+    }
+    .contact .wrap { z-index: 1; }
+    .contact h2 { border: 0; padding: 0; font-size: clamp(3rem, 9vw, 7rem); line-height: .88; max-width: 12ch; margin-bottom: 22px; }
+    .contact p { color: #fff; font-size: 1.15rem; }
+    .contact .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .contact .btn.primary { background: var(--black); }
+    .contact .btn.primary:hover { background: #000; }
+    footer { background: var(--black); color: var(--muted); padding: 26px 0; font-size: .95rem; }
+
+    @media (max-width: 760px) {
+      .nav ul { gap: 16px; font-size: .95rem; }
+      .intro { grid-template-columns: 1fr; }
+      .photo { justify-self: start; max-width: 260px; order: -1; margin: 0 14px 14px 0; }
+      .split, .stack > div { grid-template-columns: 1fr; }
+      .split { gap: 24px; }
+      .feed { aspect-ratio: 4 / 3; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hero-bg::before, .contact::after, .ticker-track { animation: none; }
+      * { transition: none !important; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Vaishnav Sankar P</h1>
-    <p>🚀 Computer Science Engineering Student | AI & Full-Stack Developer</p>
-  </header>
+  <div class="hero-bg">
+    <div class="wrap">
+      <nav class="nav" aria-label="Primary">
+        <a class="mark" href="#top">Vaishnav <span>Sankar P</span></a>
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#stack">Stack</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
 
-  <section>
-    <p>Passionate about building intelligent, real-world software that solves practical problems using Artificial Intelligence, Computer Vision, and modern web technologies. I enjoy turning ideas into scalable applications and continuously learning new technologies.</p>
-  </section>
+      <header class="hero" id="top">
+        <div class="intro">
+          <div>
+            <h1>I build AI that watches, understands and acts.</h1>
+            <p class="lede">I'm a computer science engineering student working on <strong>computer vision, AI and full-stack software</strong>. I turn ideas into systems that run on real data and solve practical problems.</p>
+            <div class="actions">
+              <a class="btn primary" href="#work">See my work</a>
+              <a class="btn ghost" href="https://github.com/vaishnav-sankar-p" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+          <div class="photo">
+            <img src="profile.png" alt="Portrait of Vaishnav Sankar P" width="450" height="732" fetchpriority="high" />
+          </div>
+        </div>
 
-  <h2>💻 Tech Stack</h2>
-  <div class="stack">
-    <div>
-      <strong>Languages</strong>
-      <ul>
-        <li>Python</li>
-        <li>Java</li>
-        <li>C</li>
-        <li>JavaScript / TypeScript</li>
-      </ul>
-    </div>
-    <div>
-      <strong>Frontend</strong>
-      <ul>
-        <li>React</li>
-        <li>Next.js</li>
-        <li>HTML / CSS / Tailwind</li>
-      </ul>
-    </div>
-    <div>
-      <strong>Backend / DB</strong>
-      <ul>
-        <li>Node.js, Express, Flask, FastAPI</li>
-        <li>MySQL, PostgreSQL, MongoDB</li>
-      </ul>
-    </div>
-    <div>
-      <strong>AI & ML</strong>
-      <ul>
-        <li>OpenCV, YOLO, TensorFlow, PyTorch</li>
-      </ul>
+        <div class="feed" role="img" aria-label="Animated demo of vehicles at a four-way junction, each marked with a detection box and confidence score">
+          <canvas id="feed"></canvas>
+        </div>
+        <p class="feed-note">A simulated junction with object detection boxes, the kind of view my traffic work is built around.</p>
+      </header>
     </div>
   </div>
 
-  <h2>🌟 Current Focus</h2>
-  <ul>
-    <li>AI-powered Intelligent Traffic Management Systems</li>
-    <li>Computer Vision & Real-Time Object Detection</li>
-    <li>Full-Stack Web Development</li>
-    <li>Cloud Deployment & DevOps</li>
-    <li>Open Source Contributions</li>
-  </ul>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Python</span><span>Computer vision</span><span>YOLO</span><span>PyTorch</span><span>React</span><span>Next.js</span><span>FastAPI</span><span>OpenCV</span><span>TensorFlow</span><span>PostgreSQL</span>
+      <span>Python</span><span>Computer vision</span><span>YOLO</span><span>PyTorch</span><span>React</span><span>Next.js</span><span>FastAPI</span><span>OpenCV</span><span>TensorFlow</span><span>PostgreSQL</span>
+    </div>
+  </div>
 
-  <h2>🎯 Goal</h2>
-  <p>To build innovative AI solutions that create real-world impact while continuously improving my software engineering skills.</p>
+  <section id="work">
+    <div class="wrap split">
+      <h2>Work</h2>
+      <div>
+        <div class="projects">
+          <article class="project">
+            <h3>cctv-X</h3>
+            <p>An intelligent assistant for security cameras. It monitors surveillance feeds, understands security events, talks to users about them, and carries out authorized security actions.</p>
+            <ul class="caps" aria-label="What cctv-X does">
+              <li>Monitors<small>Watches live surveillance feeds</small></li>
+              <li>Understands<small>Makes sense of security events</small></li>
+              <li>Communicates<small>Keeps users informed</small></li>
+              <li>Acts<small>Runs authorized security actions</small></li>
+            </ul>
+            <a class="link" href="https://github.com/vsp231-arch/cctv-X" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
 
-  <h2>📫 Let's Connect</h2>
-  <ul>
-    <li>GitHub: <a href="https://github.com/vaishnav-sankar-p">https://github.com/vaishnav-sankar-p</a></li>
-    <li>LinkedIn: <a href="https://linkedin.com/in/vaishnavsankar-p">https://linkedin.com/in/vaishnavsankar-p</a></li>
-    <li>Portfolio: <a href="https://your-portfolio.com">https://your-portfolio.com</a></li>
-  </ul>
+          <article class="project">
+            <h3>AI-based novelty recognition system</h3>
+            <p>An AI system that recognizes novelty: it picks out what is new or different from what it has seen before.</p>
+            <a class="link" href="https://github.com/vsp231-arch/ai-based-novelty-recognition-system" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+        </div>
+        <p class="more">I'm also working on AI-powered intelligent traffic management with real-time vehicle detection. More on my GitHub profile.</p>
+      </div>
+    </div>
+  </section>
 
-  <blockquote>
-    <p><em>"Code with purpose. Build with impact. Never stop learning."</em></p>
-  </blockquote>
+  <section id="stack">
+    <div class="wrap split">
+      <h2>Stack</h2>
+      <dl class="stack">
+        <div><dt>Languages</dt><dd><span>Python</span><span>Java</span><span>C</span><span>JavaScript</span><span>TypeScript</span></dd></div>
+        <div><dt>Frontend</dt><dd><span>React</span><span>Next.js</span><span>HTML and CSS</span><span>Tailwind</span></dd></div>
+        <div><dt>Backend</dt><dd><span>Node.js</span><span>Express</span><span>Flask</span><span>FastAPI</span></dd></div>
+        <div><dt>Databases</dt><dd><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span></dd></div>
+        <div><dt>AI and vision</dt><dd><span>OpenCV</span><span>YOLO</span><span>TensorFlow</span><span>PyTorch</span></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="focus">
+    <div class="wrap split">
+      <h2>Right now</h2>
+      <ul class="focus">
+        <li>Intelligent traffic management<small>Using AI to read and respond to road conditions.</small></li>
+        <li>Real-time object detection<small>Computer vision that keeps up with live video.</small></li>
+        <li>Full-stack web development<small>Shipping complete products, front to back.</small></li>
+        <li>Cloud deployment and DevOps<small>Getting projects online and keeping them running.</small></li>
+        <li>Open source<small>Learning in public and contributing back.</small></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2>Let's build something useful.</h2>
+      <p>I want to build AI solutions that make a real-world difference. If you have a project, an idea or an opportunity, get in touch.</p>
+      <div class="links">
+        <a class="btn primary" href="https://www.linkedin.com/in/vaishnavsankar-p" target="_blank" rel="noopener">Message me on LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/vaishnav-sankar-p" target="_blank" rel="noopener">See my code on GitHub</a>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    <p style="font-size:0.9rem;color:#555">This site was added to the repository to publish via GitHub Pages. If you want a custom layout or blog, I can add a theme or configure a framework (Next.js, Jekyll, Hugo).</p>
+    <div class="wrap">Code with purpose. Build with impact. Never stop learning.</div>
   </footer>
+
+  <script>
+  (function () {
+    var canvas = document.getElementById('feed');
+    var ctx = canvas.getContext('2d');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W = 0, H = 0, dpr = 1;
+    var cars = [], timers = {}, clock = 0, running = true;
+    var PERIOD = 14;
+    var RED = '#FF2A1F', WHT = '#F5F5F5';
+
+    function size() {
+      var r = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = r.width; H = r.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cars = []; timers = {};
+      for (var i = 0; i < 700; i++) step(1 / 30);
+      draw();
+    }
+
+    function geo() {
+      var roadW = Math.min(H * 0.36, W * 0.3);
+      return { cx: W / 2, cy: H / 2, rw: roadW, lane: roadW / 2 };
+    }
+
+    var LANES = [
+      { axis: 'h', s: 1 }, { axis: 'h', s: -1 },
+      { axis: 'v', s: 1 }, { axis: 'v', s: -1 }
+    ];
+    var TYPES = [
+      { name: 'car', L: 0.075, w: 0.034, p: 0.62, c: RED, tx: '#fff' },
+      { name: 'truck', L: 0.13, w: 0.04, p: 0.14, c: WHT, tx: '#0A0A0B' },
+      { name: 'bus', L: 0.16, w: 0.042, p: 0.1, c: WHT, tx: '#0A0A0B' },
+      { name: 'van', L: 0.095, w: 0.037, p: 0.14, c: RED, tx: '#fff' }
+    ];
+
+    function laneCenter(l, g) {
+      var o = g.lane / 2;
+      if (l.axis === 'h') return g.cy + (l.s === 1 ? o : -o);
+      return g.cx + (l.s === 1 ? -o : o);
+    }
+    function green(axis) {
+      var t = clock % PERIOD;
+      return axis === 'h' ? t < 5.5 : (t >= 7 && t < 12.5);
+    }
+    function yellow(axis) {
+      var t = clock % PERIOD;
+      return axis === 'h' ? (t >= 5 && t < 5.5) : (t >= 12 && t < 12.5);
+    }
+    function pickType() {
+      var r = Math.random(), a = 0;
+      for (var i = 0; i < TYPES.length; i++) { a += TYPES[i].p; if (r < a) return TYPES[i]; }
+      return TYPES[0];
+    }
+
+    function step(dt) {
+      clock += dt;
+      var g = geo(), base = Math.min(W, H * 1.8);
+      var i, j;
+      for (i = 0; i < LANES.length; i++) {
+        var l = LANES[i];
+        timers[i] = (timers[i] || 0) - dt;
+        if (timers[i] <= 0) {
+          var span = l.axis === 'h' ? W : H;
+          var t = pickType();
+          var L = t.L * base, ok = true;
+          var start = l.s === 1 ? -L : span + L;
+          for (j = 0; j < cars.length; j++) {
+            if (cars[j].lane === i && Math.abs(cars[j].pos - start) < L + cars[j].L + 30) ok = false;
+          }
+          if (ok) {
+            cars.push({
+              lane: i, pos: start, L: L, w: t.w * base, name: t.name, c: t.c, tx: t.tx,
+              conf: 0.82 + Math.random() * 0.17, speed: 0, base: base * (0.15 + Math.random() * 0.06),
+              shade: Math.random()
+            });
+          }
+          timers[i] = 0.9 + Math.random() * 1.7;
+        }
+      }
+      for (i = cars.length - 1; i >= 0; i--) {
+        var c = cars[i], ln = LANES[c.lane], s = ln.s;
+        var span2 = ln.axis === 'h' ? W : H;
+        var allowed = 1e9;
+        var stop = ln.axis === 'h'
+          ? (s === 1 ? g.cx - g.rw / 2 - 8 : g.cx + g.rw / 2 + 8)
+          : (s === 1 ? g.cy - g.rw / 2 - 8 : g.cy + g.rw / 2 + 8);
+        var front = c.pos + s * c.L / 2;
+        var d = (stop - front) * s;
+        if (!green(ln.axis) && d > -2) allowed = Math.min(allowed, d);
+        for (j = 0; j < cars.length; j++) {
+          var o = cars[j];
+          if (o === c || o.lane !== c.lane) continue;
+          var gap = (o.pos - c.pos) * s;
+          if (gap > 0) allowed = Math.min(allowed, gap - (c.L + o.L) / 2 - 12);
+        }
+        allowed = Math.max(0, allowed);
+        var desired = Math.min(c.base, allowed / 0.7);
+        c.speed += (desired - c.speed) * Math.min(1, dt * 4);
+        c.pos += s * Math.min(c.speed * dt, allowed);
+        if (c.pos < -c.L * 2 || c.pos > span2 + c.L * 2) cars.splice(i, 1);
+      }
+    }
+
+    function rect(x, y, w, h, r) {
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h);
+    }
+
+    function draw() {
+      var g = geo();
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#0D0D10'; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#1A1A1F';
+      ctx.fillRect(0, g.cy - g.rw / 2, W, g.rw);
+      ctx.fillRect(g.cx - g.rw / 2, 0, g.rw, H);
+      ctx.strokeStyle = 'rgba(245,245,245,.35)'; ctx.lineWidth = 2; ctx.setLineDash([16, 14]);
+      ctx.beginPath();
+      ctx.moveTo(0, g.cy); ctx.lineTo(g.cx - g.rw / 2, g.cy);
+      ctx.moveTo(g.cx + g.rw / 2, g.cy); ctx.lineTo(W, g.cy);
+      ctx.moveTo(g.cx, 0); ctx.lineTo(g.cx, g.cy - g.rw / 2);
+      ctx.moveTo(g.cx, g.cy + g.rw / 2); ctx.lineTo(g.cx, H);
+      ctx.stroke(); ctx.setLineDash([]);
+      ctx.strokeStyle = 'rgba(245,245,245,.85)'; ctx.lineWidth = 3;
+      var hx1 = g.cx - g.rw / 2 - 4, hx2 = g.cx + g.rw / 2 + 4;
+      var vy1 = g.cy - g.rw / 2 - 4, vy2 = g.cy + g.rw / 2 + 4;
+      ctx.beginPath();
+      ctx.moveTo(hx1, g.cy); ctx.lineTo(hx1, g.cy + g.rw / 2);
+      ctx.moveTo(hx2, g.cy); ctx.lineTo(hx2, g.cy - g.rw / 2);
+      ctx.moveTo(g.cx - g.rw / 2, vy1); ctx.lineTo(g.cx, vy1);
+      ctx.moveTo(g.cx, vy2); ctx.lineTo(g.cx + g.rw / 2, vy2);
+      ctx.stroke();
+
+      var inFrame = 0, fs = Math.max(10, Math.min(13, W / 60));
+      ctx.font = '600 ' + fs + 'px "Barlow", system-ui, sans-serif';
+      ctx.textBaseline = 'middle';
+      for (var i = 0; i < cars.length; i++) {
+        var c = cars[i], ln = LANES[c.lane], lc = laneCenter(ln, g);
+        var x, y, bw, bh;
+        if (ln.axis === 'h') { bw = c.L; bh = c.w; x = c.pos - bw / 2; y = lc - bh / 2; }
+        else { bw = c.w; bh = c.L; x = lc - bw / 2; y = c.pos - bh / 2; }
+        if (!(x + bw > 0 && x < W && y + bh > 0 && y < H)) continue;
+        inFrame++;
+        ctx.fillStyle = c.shade > 0.5 ? '#3A3A44' : '#2C2C34';
+        rect(x, y, bw, bh, 4); ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,.12)';
+        if (ln.axis === 'h') rect(x + bw * (ln.s === 1 ? .58 : .12), y + 3, bw * .3, bh - 6, 2);
+        else rect(x + 3, y + bh * (ln.s === 1 ? .58 : .12), bw - 6, bh * .3, 2);
+        ctx.fill();
+        var pad = 4, bx = x - pad, by = y - pad, ww = bw + pad * 2, hh = bh + pad * 2, k = Math.min(10, ww / 3, hh / 3);
+        ctx.strokeStyle = c.c; ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(bx, by + k); ctx.lineTo(bx, by); ctx.lineTo(bx + k, by);
+        ctx.moveTo(bx + ww - k, by); ctx.lineTo(bx + ww, by); ctx.lineTo(bx + ww, by + k);
+        ctx.moveTo(bx + ww, by + hh - k); ctx.lineTo(bx + ww, by + hh); ctx.lineTo(bx + ww - k, by + hh);
+        ctx.moveTo(bx + k, by + hh); ctx.lineTo(bx, by + hh); ctx.lineTo(bx, by + hh - k);
+        ctx.stroke();
+        ctx.globalAlpha = .85; ctx.lineWidth = 1; rect(bx, by, ww, hh, 2); ctx.stroke(); ctx.globalAlpha = 1;
+        var txt = c.name + ' ' + c.conf.toFixed(2), tw = ctx.measureText(txt).width + 10, th = fs + 7;
+        var ly = by - th < 2 ? by + hh : by - th;
+        ctx.fillStyle = c.c; rect(bx, ly, tw, th, 3); ctx.fill();
+        ctx.fillStyle = c.tx; ctx.fillText(txt, bx + 5, ly + th / 2 + 1);
+      }
+
+      var pad2 = 14, hudH = fs + 16, label = 'vehicles in frame  ' + inFrame;
+      ctx.font = '600 ' + (fs + 1) + 'px "Barlow", system-ui, sans-serif';
+      var hw = ctx.measureText(label).width + 22;
+      ctx.fillStyle = 'rgba(245,245,245,.94)'; rect(pad2, pad2, hw, hudH, 4); ctx.fill();
+      ctx.fillStyle = '#0A0A0B'; ctx.fillText(label, pad2 + 11, pad2 + hudH / 2 + 1);
+      var gh = green('h'), yh = yellow('h'), gv = green('v');
+      var col = yh ? '#F2A100' : gh ? '#35C46B' : '#E5484D';
+      var sig = gh || yh ? 'east-west go' : gv ? 'north-south go' : 'all stop';
+      var sw = ctx.measureText(sig).width + 40;
+      ctx.fillStyle = 'rgba(245,245,245,.94)'; rect(W - pad2 - sw, pad2, sw, hudH, 4); ctx.fill();
+      ctx.fillStyle = col; ctx.beginPath(); ctx.arc(W - pad2 - sw + 15, pad2 + hudH / 2, 5, 0, 6.283); ctx.fill();
+      ctx.fillStyle = '#0A0A0B'; ctx.fillText(sig, W - pad2 - sw + 28, pad2 + hudH / 2 + 1);
+    }
+
+    var last = 0;
+    function frame(ts) {
+      if (!running) return;
+      var dt = Math.min((ts - last) / 1000 || 0.016, 0.05);
+      last = ts;
+      step(dt); draw();
+      requestAnimationFrame(frame);
+    }
+
+    size();
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(size, 150); });
+    if (!reduce) {
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (e) {
+          var vis = e[0].isIntersecting;
+          if (vis && !running) { running = true; last = performance.now(); requestAnimationFrame(frame); }
+          if (!vis) running = false;
+        }).observe(canvas);
+      }
+      requestAnimationFrame(frame);
+    }
+  })();
+  </script>
 </body>
 </html>
